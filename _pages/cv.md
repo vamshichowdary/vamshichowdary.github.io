@@ -11,30 +11,40 @@ redirect_from:
 
 Education
 ======
-* B.S. in GitHub, GitHub University, 2012
-* M.S. in Jekyll, GitHub University, 2014
-* Ph.D in Version Control Theory, GitHub University, 2018 (expected)
+* B.S. in Electronics and Communication Engineering, Indian Institute of Technology, Roorkee, 2016
+* M.S. in Electrical and Computer Engineering, University of California Santa Barbara, 2021 (Present)
+
+Research experience
+======
+* Sep'2020 - Present: Graduate Student Researcher, UCSF
+  *  Developing tools and models for MR based attenuation correction in PET/MRI data.
+
+* Oct'2019 - Jun'2020: Graduate Student Researcher, UCSB
+  * Researching on Deep Neural Networks for Computer Vision tasks.
 
 Work experience
 ======
-* Summer 2015: Research Assistant
-  * Github University
-  * Duties included: Tagging issues
-  * Supervisor: Professor Git
+* Summer 2020: Machine Learning Intern, Briteseed, Chicago, IL
+  * Using deep learning and computer vision on hyperspectral image data from surgical tools to detect tissues.
 
-* Fall 2015: Research Assistant
-  * Github University
-  * Duties included: Merging pull requests
-  * Supervisor: Professor Hub
+* Jul'2016 - Aug'2019: Engineer, Samsung Research Institute, Delhi, India
+  * Developing Audio/Music Applications for enhancing user experience in Samsung Smart TVs.
+    * Developed ML based Music Classification Engine, a C++ based audio feature extraction framework with real time classification of audio using SVM and Statistical Analysis.
+    * Developed bluetooth music player for visualizing and interacting with music on Samsung Smart TVs.
+
+* Summer 2015: Embedded Systems Intern, VIOS Medical Pvt. Ltd., Bengaluru, India
+  * Vios Medical was a U.S. based medical technology company focusing on utilizing medical-grade IoT sensors and Virtual Patient Care Services, acquired by Japan's Murata Manufacturing Co., Ltd.
+    * Characterized different wireless modules used in Vios medical sensors based on energy consumption and connectivity.
+    * Developed Vios Software packaging and distribution tool for Linux systems.
   
-Skills
+Courses and Skills
 ======
-* Skill 1
-* Skill 2
-  * Sub-skill 2.1
-  * Sub-skill 2.2
-  * Sub-skill 2.3
-* Skill 3
+* Courses
+  * Computer Vision, Theoretical Machine Learning, Pattern Recognition, Digital Image Processing, Optimal Estimation and Filtering, Matrix Analysis and Computations.
+* Programming Languages
+  * C++, Python, C, Julia, Javascript, C#, Verilog, VHDL.
+* Frameworks
+  * PyTorch, Keras, Tensorflow, MATLAB, openCV, numpy, scikit, ffmpeg, CUDA, ARM Compute Library (ACL).
 
 Publications
 ======
@@ -42,6 +52,7 @@ Publications
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
+<!---
 Talks
 ======
   <ul>{% for post in site.talks %}
@@ -54,6 +65,11 @@ Teaching
     {% include archive-single-cv.html %}
   {% endfor %}</ul>
   
-Service and leadership
+-->
+
+Scholarships and Awards
 ======
-* Currently signed in to 43 different slack teams
+* Outstanding Performance Award, Samsung Research Institute, 2018.
+* Project of the Year Award, Samsung Research Institute, 2018.
+* Kishore Vaigyanik Protsahan Yojana Fellowship, Department of Science and Technology, Govt. of India, 2012.
+* Multiple IIT Roorkee Semester Merit Scholarships.
