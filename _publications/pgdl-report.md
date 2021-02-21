@@ -2,7 +2,7 @@
 title: "Predicting Generalization in Deep Learning via Local Measures of Distortion"
 collection: Reports
 permalink: /publication/pgdl-report
-excerpt: 'This paper is about the number 1. The number 2 is left for future work.'
+excerpt: 'We study generalization in deep learning by appealing to complexity measures originally developed in approximation and information theory.'
 date: 2020-12-13
 venue: 'PGDL Competition at NeurIPS 2020'
 paperurl: 'https://arxiv.org/pdf/2012.06969'
@@ -12,4 +12,4 @@ We study generalization in deep learning by appealing to complexity measures ori
 
 [Download paper here](https://arxiv.org/pdf/2012.06969)
 
-Recommended citation: 'A Rajagopal, VC Madala, S Chandrasekaran, P Larson - arXiv preprint arXiv:2012.06969, 2020'
+Recommended citation: 'A Rajagopal, Vamshi C Madala, S Chandrasekaran, P Larson - arXiv preprint arXiv:2012.06969, 2020'
