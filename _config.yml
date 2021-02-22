@@ -7,7 +7,7 @@
 
 # Site Settings
 locale                   : "en-US"
-title                    : "Vamshi"
+title                    : "Vamshi Madala"
 title_separator          : "-"
 name                     : &name "Vamshi C.  Madala"
 description              : &description "Graduate Student Researcher at UCSB"
@@ -80,7 +80,7 @@ analytics:
 
 # Site Author
 author:
-  name             : "Vamshi"
+  name             : "Vamshi Madala"
   avatar           : "profile.png"
   bio              : "MS, Electrical and Computer Engineering, UCSB, Deep Learning"
   location         : "Santa Barbara, California"
