@@ -10,6 +10,6 @@ citation: 'A Rajagopal, Vamshi C Madala, S Chandrasekaran, P Larson - arXiv prep
 ---
 We study generalization in deep learning by appealing to complexity measures originally developed in approximation and information theory. While these concepts are challenged by the high-dimensional and data-defined nature of deep learning, we show that simple vector quantization approaches such as PCA, GMMs, and SVMs capture their spirit when applied layer-wise to deep extracted features giving rise to relatively inexpensive complexity measures that correlate well with generalization performance. We discuss our results in 2020 NeurIPS PGDL challenge.
 
-[Download paper here](https://arxiv.org/pdf/2012.06969)
+Download paper here: [Link1](https://arxiv.org/pdf/2012.06969) [Link2](https://sites.google.com/view/pgdl2020/resources?authuser=0)
 
 Recommended citation: 'A Rajagopal, Vamshi C Madala, S Chandrasekaran, P Larson - arXiv preprint arXiv:2012.06969, 2020'
