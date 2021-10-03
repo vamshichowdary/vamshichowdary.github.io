@@ -82,9 +82,9 @@ analytics:
 author:
   name             : "Vamshi Madala"
   avatar           : "profile.png"
-  bio              : "MS, Electrical and Computer Engineering, UCSB, Deep Learning"
+  bio              : "PhD, Electrical and Computer Engineering, UCSB"
   location         : "Santa Barbara, California"
-  employer         : "UCSB"
+    #employer         : "UCSB"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=AFSFb9YAAAAJ&hl=en"
   email            : "vamshichowdary@ucsb.edu"
