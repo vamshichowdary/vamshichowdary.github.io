@@ -11,16 +11,20 @@ redirect_from:
 
 Education
 ======
-* B.S. in Electronics and Communication Engineering, Indian Institute of Technology, Roorkee, 2016
-* M.S. in Electrical and Computer Engineering, University of California Santa Barbara, 2021 (Present)
+* PhD. in Electrical and Computer Engineering, University of California Santa Barbara, (Present)
+* M.S. in Electrical and Computer Engineering, University of California Santa Barbara, 2021
+* B.Tech. in Electronics and Communication Engineering, Indian Institute of Technology, Roorkee, 2016
 
 Research experience
 ======
-* Sep'2020 - Present: Graduate Student Researcher, UCSF
-  *  Developing tools and models for MR based attenuation correction in PET/MRI data.
+* Oct'2021 - Present: Graduate Student Researcher, UCSB
+  * Researching theoretical frameworks for Deep Learning. Also working on buildings semantic segmentation and height estimation from satellite imagery.
+
+* Sep'2020 - Sep'2021: Graduate Student Researcher, UCSF
+  *  Developed Medviz - an AWS web portal and visualization tool for deploying machine learning models for processing of large PET/MRI datasets.
 
 * Oct'2019 - Jun'2020: Graduate Student Researcher, UCSB
-  * Researching on Deep Neural Networks for Computer Vision tasks.
+  * Research on Generalization in Deep Neural Networks: [(Thesis)](https://vamshichowdary.github.io/publications/ms\_thesis).
 
 Work experience
 ======
@@ -70,6 +74,6 @@ Teaching
 Scholarships and Awards
 ======
 * Outstanding Performance Award, Samsung Research Institute, 2018.
-* Project of the Year Award, Samsung Research Institute, 2018.
+* Project of the Year Award for "Music Genre Recognition", Samsung Research Institute, 2018.
 * Kishore Vaigyanik Protsahan Yojana Fellowship, Department of Science and Technology, Govt. of India, 2012.
 * Multiple IIT Roorkee Semester Merit Scholarships.
