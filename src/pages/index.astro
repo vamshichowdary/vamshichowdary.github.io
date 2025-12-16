@@ -1,0 +1,140 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Socials from "@/components/Socials.astro";
+import Hr from "@/components/Hr.astro";
+import { SOCIALS } from "@/constants";
+---
+
+<Layout>
+  <Header />
+  <main id="main-content" data-layout="index">
+    <section id="hero" class="pt-8 pb-6">
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+        Vamshi Madala
+      </h1>
+      <p>
+        I come from Hyderabad, India and I work as a part-time marketing agent for Hyderabadi Biryani. I play Basketball and follow NBA religiously (Steph Curry is the GOAT btw).
+      </p>
+      <p class="mt-2">
+        I love to read for fun and I struggle finding non-serious science fiction books like <em>The Hitchhiker's Guide to the Galaxy</em> and <em>The Foundation Series</em> and so I just end up reading a lot of non-fiction.
+        If you have some suggestions please leave them at <a href="https://www.goodreads.com/user/show/44225807-vamshi-chowdary" class="underline decoration-dashed underline-offset-4 hover:text-accent">goodreads</a>.
+      </p>
+      <p class="mt-2">
+        Lately I have been developing some interest in old Telugu literature and also enjoying learning Piano on the Keyboard. I love <a href="https://open.spotify.com/artist/7Fa8B0rJSmeeGjYCJJXrb3" class="underline decoration-dashed underline-offset-4 hover:text-accent">Vivek Sagar's music</a>.
+      </p>
+      
+      {
+        SOCIALS.length > 0 && (
+          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
+            <Socials />
+          </div>
+        )
+      }
+    </section>
+
+    <Hr />
+
+    <section id="about" class="pt-12 pb-6 prose dark:prose-invert max-w-none">
+      <h2 class="text-2xl font-semibold tracking-wide">About Me</h2>
+      <p>
+        I am a third year PhD student in Electrical and Computer Engineering at University of California Santa Barbara, advised by <a href="http://scg.ece.ucsb.edu/people.html">Prof. Shivkumar Chandrasekaran</a>.
+        My research currently focusses on explainable AI and developing tools and theoretical frameworks to lower the barriers in deploying deep learning models into real world.
+        I finished my Masters also at UCSB with thesis titled: <a href="https://vamshichowdary.github.io/publication/msthesis">"A study of Generalization in Deep Neural Networks"</a>.
+      </p>
+      <p>
+        During the summer of 2022, I interned at Apple and worked on the <em>Fall Detection</em> feature. It was an amazing experience working at the Apple Park with brilliant people and enjoying Biryani on the weekends.
+        During the summer of 2020, I worked as an Intern at <a href="https://www.briteseed.com">Briteseed</a>, Chicago, training neural networks on hyperspectral imaging data.
+      </p>
+      <p>
+        Before coming to the US, from 2016-2019 I worked as a Software Engineer at Samsung R&D Institute, Delhi developing audio processing algorithms and ML models for predicting music genres from audio data.
+        Prior to that, I graduated from IIT Roorkee in 2016 with a Bachelors degree working on developing low-cost display devices using Au/Ag Nanoparticles, advised by <a href="https://www.iitr.ac.in/~ECE/Brijesh_Kumar">Prof. Brijesh Kumar</a> and <a href="https://www.iitr.ac.in/~ECE/Manhas__Sanjeev">Prof. Sanjeev Manhas</a>.
+      </p>
+    </section>
+
+    <Hr />
+
+    <section id="cv" class="pt-12 pb-6 prose dark:prose-invert max-w-none">
+      <h2 class="text-2xl font-semibold tracking-wide">CV</h2>
+      
+      <h3>Education</h3>
+      <ul>
+        <li><strong>PhD. in Electrical and Computer Engineering</strong>, University of California Santa Barbara, (Present)</li>
+        <li><strong>M.S. in Electrical and Computer Engineering</strong>, University of California Santa Barbara, 2021</li>
+        <li><strong>B.Tech. in Electronics and Communication Engineering</strong>, Indian Institute of Technology, Roorkee, 2016</li>
+      </ul>
+
+      <h3>Research Experience</h3>
+      <ul>
+        <li>
+          <strong>Graduate Student Researcher, UCSB</strong> (Oct'2021 - Present)
+          <ul>
+            <li>Developing tools and theoretical frameworks to lower the barriers in deploying deep learning models into real world.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Graduate Student Researcher, UCSF</strong> (Sep'2020 - Sep'2021)
+          <ul>
+            <li>Developed Medviz - an AWS web portal and visualization tool for deploying machine learning models for processing of large PET/MRI datasets.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Graduate Student Researcher, UCSB</strong> (Oct'2019 - Jun'2020)
+          <ul>
+            <li>Research on Generalization in Deep Neural Networks: <a href="https://vamshichowdary.github.io/publications/ms_thesis">(Thesis)</a>.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Work Experience</h3>
+      <ul>
+        <li>
+          <strong>Software Engineering Intern, Apple, Cupertino, CA</strong> (Summer 2022)
+          <ul>
+            <li>Developed physics based algorithms to improve the Fall Detection feature. Created data processing pipelines to efficiently handle hundreds of hours of time series data.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Machine Learning Intern, Briteseed, Chicago, IL</strong> (Summer 2020)
+          <ul>
+            <li>Using deep learning and computer vision on hyperspectral image data from surgical tools to detect tissues.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Engineer, Samsung Research Institute, Delhi, India</strong> (Jul'2016 - Aug'2019)
+          <ul>
+            <li>Developing Audio/Music Applications for enhancing user experience in Samsung Smart TVs.</li>
+            <li>Developed ML based Music Classification Engine, a C++ based audio feature extraction framework with real time classification of audio using SVM and Statistical Analysis.</li>
+            <li>Developed bluetooth music player for visualizing and interacting with music on Samsung Smart TVs.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Embedded Systems Intern, VIOS Medical Pvt. Ltd., Bengaluru, India</strong> (Summer 2015)
+          <ul>
+            <li>Vios Medical was a U.S. based medical technology company focusing on utilizing medical-grade IoT sensors and Virtual Patient Care Services, acquired by Japan's Murata Manufacturing Co., Ltd.</li>
+            <li>Characterized different wireless modules used in Vios medical sensors based on energy consumption and connectivity.</li>
+            <li>Developed Vios Software packaging and distribution tool for Linux systems.</li>
+          </ul>
+        </li>
+      </ul>
+
+      <h3>Courses and Skills</h3>
+      <ul>
+        <li><strong>Courses:</strong> Computer Vision, Theoretical Machine Learning, Pattern Recognition, Digital Image Processing, Optimal Estimation and Filtering, Matrix Analysis and Computations.</li>
+        <li><strong>Programming Languages:</strong> C++, Python, C, Julia, Javascript, C#, Verilog, VHDL.</li>
+        <li><strong>Frameworks:</strong> PyTorch, Keras, Tensorflow, MATLAB, openCV, numpy, scikit, ffmpeg, CUDA, ARM Compute Library (ACL).</li>
+      </ul>
+
+      <h3>Scholarships and Awards</h3>
+      <ul>
+        <li>Outstanding Performance Award, Samsung Research Institute, 2018.</li>
+        <li>Project of the Year Award for "Music Genre Recognition", Samsung Research Institute, 2018.</li>
+        <li>Kishore Vaigyanik Protsahan Yojana Fellowship, Department of Science and Technology, Govt. of India, 2012.</li>
+        <li>Multiple IIT Roorkee Semester Merit Scholarships.</li>
+      </ul>
+    </section>
+  </main>
+  <Footer />
+</Layout>
