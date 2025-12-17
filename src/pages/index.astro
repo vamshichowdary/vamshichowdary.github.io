@@ -25,16 +25,17 @@ const sortedPosts = posts.sort(
       <div class="md:col-span-4 space-y-12">
         
         <!-- Profile Header -->
-        <div class="flex flex-col items-center md:items-start space-y-4">
+        <div class="flex flex-col items-center space-y-4">
 <img src="/assets/images/profile.JPG" alt="Profile Image" class="w-48 h-48 rounded-full border-4 border-white dark:border-gray-900 shadow-lg object-cover shrink-0" />
+
           {
             SOCIALS.length > 0 && (
-              <div class="flex flex-wrap align-center md:justify-start gap-2">
+              <div class="flex flex-wrap justify-center gap-2">
                 <Socials />
               </div>
             )
           }
-          <div class="text-center md:text-left">
+          <div class="text-center">
             <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">vamchowdary72[at]gmail</p>
           </div>
         </div>
