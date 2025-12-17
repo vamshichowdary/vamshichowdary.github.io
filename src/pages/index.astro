@@ -26,16 +26,10 @@ const sortedPosts = posts.sort(
         
         <!-- Profile Header -->
         <div class="flex flex-col items-center md:items-start space-y-4">
-          <div class="w-48 h-48 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 shadow-lg overflow-hidden shrink-0">
-             <span class="text-gray-400">Profile Image</span>
-          </div>
-          <div class="text-center md:text-left">
-            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">PhD Candidate</p>
-            <p class="text-xs text-gray-500 dark:text-gray-500">UCSB</p>
-          </div>
+<img src="/assets/images/profile.JPG" alt="Profile Image" class="w-48 h-48 rounded-full border-4 border-white dark:border-gray-900 shadow-lg object-cover shrink-0" />
           {
             SOCIALS.length > 0 && (
-              <div class="flex flex-wrap justify-center md:justify-start gap-2">
+              <div class="flex flex-wrap align-center md:justify-start gap-2">
                 <Socials />
               </div>
             )
@@ -191,6 +185,7 @@ const sortedPosts = posts.sort(
             venue="AAAI Workshop on AI to Accelerate Science and Engineering (AI2ASE), 2026"
             paperUrl="https://arxiv.org/abs/2507.11870"
             codeUrl="https://github.com/vamshichowdary/MultimodalNeuralOperator"
+            thumbnail="/assets/images/publications/fmm_block.png"
           />
           
           <PublicationCard
@@ -199,6 +194,7 @@ const sortedPosts = posts.sort(
             venue="IEEE Open Journal of Signal Processing, vol. 4, pp. 233-241, 2023"
             paperUrl="https://ieeexplore.ieee.org/abstract/document/10107763"
             codeUrl="https://github.com/vamshichowdary/cod-cnn"
+            thumbnail="/assets/images/publications/cod_cnn.png"
           />
 
           <PublicationCard
@@ -207,6 +203,7 @@ const sortedPosts = posts.sort(
             venue="Proceedings of the Fourth Conference on Medical Imaging with Deep Learning, 2021"
             paperUrl="https://proceedings.mlr.press/v143/rajagopal21a.html"
             codeUrl="https://gitlab.com/abhe/UNet-Generalization_MIDL2021"
+            thumbnail="/assets/images/publications/midl.jpg"
           />
           
           <PublicationCard
@@ -214,6 +211,7 @@ const sortedPosts = posts.sort(
             authors="A Rajagopal, Vamshi C Madala, S Chandrasekaran, P Larson"
             venue="arXiv preprint arXiv:2012.06969, 2020"
             paperUrl="https://arxiv.org/abs/2012.06969"
+            thumbnail="/assets/images/publications/cluster.jpg"
           />
 
           <PublicationCard
@@ -221,6 +219,7 @@ const sortedPosts = posts.sort(
             authors="Vamshi C Madala"
             venue="Master's Thesis, University of California, Santa Barbara, 2021"
             paperUrl="https://www.proquest.com/dissertations-theses/study-generalization-deep-neural-networks/docview/2604320736/se-2?accountid=14522"
+            thumbnail="/assets/images/publications/ms.jpg"
           />
         </section>
       </div>
