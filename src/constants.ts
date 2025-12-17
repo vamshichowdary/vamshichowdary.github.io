@@ -7,6 +7,7 @@ import IconWhatsapp from "@/assets/icons/IconWhatsapp.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconPinterest from "@/assets/icons/IconPinterest.svg";
+import IconScholar from "@/assets/icons/IconScholar.svg";
 import { SITE } from "@/config";
 
 interface Social {
@@ -17,6 +18,12 @@ interface Social {
 }
 
 export const SOCIALS: Social[] = [
+    {
+        name: "Google Scholar",
+        href: "https://scholar.google.com/citations?user=AFSFb9YAAAAJ&hl=en",
+        linkTitle: `${SITE.title} on Google Scholar`,
+        icon: IconScholar,
+    },
     {
         name: "GitHub",
         href: "https://github.com/vamshichowdary",
@@ -35,12 +42,12 @@ export const SOCIALS: Social[] = [
         linkTitle: `${SITE.title} on X`,
         icon: IconBrandX,
     },
-    {
-        name: "Mail",
-        href: "mailto:vamshichowdary@ucsb.edu",
-        linkTitle: `Send an email to ${SITE.title}`,
-        icon: IconMail,
-    },
+    // {
+    //     name: "Mail",
+    //     href: "mailto:vamshichowdary@ucsb.edu",
+    //     linkTitle: `Send an email to ${SITE.title}`,
+    //     icon: IconMail,
+    // },
 ] as const;
 
 export const SHARE_LINKS: Social[] = [

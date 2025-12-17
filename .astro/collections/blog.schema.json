@@ -4,9 +4,11 @@
     "blog": {
       "type": "object",
       "properties": {
-        "author": {
-          "type": "string",
-          "default": "Vamshi Madala"
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
         },
         "pubDatetime": {
           "anyOf": [
@@ -24,38 +26,9 @@
             }
           ]
         },
-        "modDatetime": {
-          "anyOf": [
-            {
-              "anyOf": [
-                {
-                  "not": {}
-                },
-                {
-                  "anyOf": [
-                    {
-                      "type": "string",
-                      "format": "date-time"
-                    },
-                    {
-                      "type": "string",
-                      "format": "date"
-                    },
-                    {
-                      "type": "integer",
-                      "format": "unix-time"
-                    }
-                  ]
-                }
-              ]
-            },
-            {
-              "type": "null"
-            }
-          ]
-        },
-        "title": {
-          "type": "string"
+        "author": {
+          "type": "string",
+          "default": "Vamshi Madala"
         },
         "featured": {
           "type": "boolean"
@@ -72,29 +45,14 @@
             "others"
           ]
         },
-        "ogImage": {
-          "type": "string"
-        },
-        "description": {
-          "type": "string"
-        },
-        "canonicalURL": {
-          "type": "string"
-        },
-        "hideEditPost": {
-          "type": "boolean"
-        },
-        "timezone": {
-          "type": "string"
-        },
         "$schema": {
           "type": "string"
         }
       },
       "required": [
-        "pubDatetime",
         "title",
-        "description"
+        "description",
+        "pubDatetime"
       ],
       "additionalProperties": false
     }

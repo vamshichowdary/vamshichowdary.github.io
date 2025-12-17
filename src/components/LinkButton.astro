@@ -29,12 +29,13 @@ const {
       <slot />
     </span>
   ) : (
-    <a
+  <a
       id={id}
       {href}
       class:list={["group inline-block hover:text-accent", className]}
       aria-label={ariaLabel}
       title={title}
+      {...Astro.props}
     >
       <slot />
     </a>

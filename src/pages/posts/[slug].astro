@@ -1,0 +1,28 @@
+---
+import { getCollection, render } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog");
+  return posts.map((post) => ({
+    params: { slug: post.id },
+    props: { post },
+  }));
+}
+
+const { post } = Astro.props;
+const { title, description, pubDatetime } = post.data;
+const { Content } = await render(post);
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main id="main-content" class="max-w-4xl mx-auto px-6 py-8 prose dark:prose-invert">
+    <h1 class="mb-2">{title}</h1>
+    <div class="text-sm text-gray-500 mb-8">{pubDatetime.toLocaleDateString()}</div>
+    <Content />
+  </main>
+  <Footer />
+</Layout>

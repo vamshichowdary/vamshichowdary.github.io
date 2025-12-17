@@ -1,0 +1,34 @@
+---
+import { type CollectionEntry } from "astro:content";
+
+export interface Props {
+  href?: string;
+  frontmatter: CollectionEntry<"blog">["data"];
+}
+
+const { href, frontmatter } = Astro.props;
+const { title, pubDatetime, description } = frontmatter;
+
+const date = pubDatetime.toLocaleDateString("en-US", {
+  year: "numeric",
+  month: "long",
+  day: "numeric",
+});
+---
+
+<div class="flex flex-col sm:flex-row gap-4 mb-8">
+  <div class="w-full sm:w-48 shrink-0">
+      <div class="w-full h-32 bg-gray-100 dark:bg-gray-800 rounded-lg flex items-center justify-center border border-gray-200 dark:border-gray-700">
+        <span class="text-xs text-gray-400">No Image</span>
+      </div>
+  </div>
+  <div class="flex-grow">
+    <h3 class="text-lg font-semibold text-gray-900 dark:text-white leading-tight mb-2">
+      <a href={href} class="hover:text-accent hover:underline decoration-dashed underline-offset-4">
+        {title}
+      </a>
+    </h3>
+    <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">{date}</p>
+    <p class="text-sm italic text-gray-500 dark:text-gray-400 mb-2">{description}</p>
+  </div>
+</div>

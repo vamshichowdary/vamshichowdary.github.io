@@ -4,137 +4,204 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Socials from "@/components/Socials.astro";
 import Hr from "@/components/Hr.astro";
+import ExperienceCard from "@/components/ExperienceCard.astro";
+import PublicationCard from "@/components/PublicationCard.astro";
 import { SOCIALS } from "@/constants";
 ---
 
 <Layout>
   <Header />
   <main id="main-content" data-layout="index">
-    <section id="hero" class="pt-8 pb-6">
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Vamshi Madala
-      </h1>
-      <p>
-        I come from Hyderabad, India and I work as a part-time marketing agent for Hyderabadi Biryani. I play Basketball and follow NBA religiously (Steph Curry is the GOAT btw).
-      </p>
-      <p class="mt-2">
-        I love to read for fun and I struggle finding non-serious science fiction books like <em>The Hitchhiker's Guide to the Galaxy</em> and <em>The Foundation Series</em> and so I just end up reading a lot of non-fiction.
-        If you have some suggestions please leave them at <a href="https://www.goodreads.com/user/show/44225807-vamshi-chowdary" class="underline decoration-dashed underline-offset-4 hover:text-accent">goodreads</a>.
-      </p>
-      <p class="mt-2">
-        Lately I have been developing some interest in old Telugu literature and also enjoying learning Piano on the Keyboard. I love <a href="https://open.spotify.com/artist/7Fa8B0rJSmeeGjYCJJXrb3" class="underline decoration-dashed underline-offset-4 hover:text-accent">Vivek Sagar's music</a>.
-      </p>
+    <div class="max-w-6xl mx-auto px-6 py-8 grid grid-cols-1 md:grid-cols-12 gap-12">
       
-      {
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex flex-col sm:flex-row sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
+      <!-- Left Sidebar (Profile + CV) - Takes 4/12 columns -->
+      <div class="md:col-span-4 space-y-12">
+        
+        <!-- Profile Header -->
+        <div class="flex flex-col items-center md:items-start space-y-4">
+          <div class="w-48 h-48 bg-gray-200 dark:bg-gray-800 rounded-full flex items-center justify-center border-4 border-white dark:border-gray-900 shadow-lg overflow-hidden shrink-0">
+             <span class="text-gray-400">Profile Image</span>
           </div>
-        )
-      }
-    </section>
+          <div class="text-center md:text-left">
+            <p class="text-sm text-gray-600 dark:text-gray-400 mt-1">PhD Candidate</p>
+            <p class="text-xs text-gray-500 dark:text-gray-500">UCSB</p>
+          </div>
+          {
+            SOCIALS.length > 0 && (
+              <div class="flex flex-wrap justify-center md:justify-start gap-2">
+                <Socials />
+              </div>
+            )
+          }
+          <div class="text-center md:text-left">
+            <p class="text-xs text-gray-500 dark:text-gray-400 mt-1">vamchowdary72[at]gmail</p>
+          </div>
+        </div>
 
-    <Hr />
+        <hr class="border-gray-200 dark:border-gray-700" />
 
-    <section id="about" class="pt-12 pb-6 prose dark:prose-invert max-w-none">
-      <h2 class="text-2xl font-semibold tracking-wide">About Me</h2>
-      <p>
-        I am a third year PhD student in Electrical and Computer Engineering at University of California Santa Barbara, advised by <a href="http://scg.ece.ucsb.edu/people.html">Prof. Shivkumar Chandrasekaran</a>.
-        My research currently focusses on explainable AI and developing tools and theoretical frameworks to lower the barriers in deploying deep learning models into real world.
-        I finished my Masters also at UCSB with thesis titled: <a href="https://vamshichowdary.github.io/publication/msthesis">"A study of Generalization in Deep Neural Networks"</a>.
-      </p>
-      <p>
-        During the summer of 2022, I interned at Apple and worked on the <em>Fall Detection</em> feature. It was an amazing experience working at the Apple Park with brilliant people and enjoying Biryani on the weekends.
-        During the summer of 2020, I worked as an Intern at <a href="https://www.briteseed.com">Briteseed</a>, Chicago, training neural networks on hyperspectral imaging data.
-      </p>
-      <p>
-        Before coming to the US, from 2016-2019 I worked as a Software Engineer at Samsung R&D Institute, Delhi developing audio processing algorithms and ML models for predicting music genres from audio data.
-        Prior to that, I graduated from IIT Roorkee in 2016 with a Bachelors degree working on developing low-cost display devices using Au/Ag Nanoparticles, advised by <a href="https://www.iitr.ac.in/~ECE/Brijesh_Kumar">Prof. Brijesh Kumar</a> and <a href="https://www.iitr.ac.in/~ECE/Manhas__Sanjeev">Prof. Sanjeev Manhas</a>.
-      </p>
-    </section>
+        <!-- Education in Sidebar -->
+        <section id="education">
+          <h2 class="text-lg font-bold tracking-wide mb-4 uppercase text-gray-800 dark:text-gray-200">Education</h2>
+          <ol class="relative border-s border-gray-200 dark:border-gray-700 ms-3 space-y-6">
+            <ExperienceCard
+              date="2021-Present"
+              title="PhD"
+              company="UCSB"
+              description={[
+                "Understanding and designing DNN architectures from approximation theoretic perspective, with focus on efficincy and provable generalization.",
+                "Advisor: Prof. Shivkumar Chandrasekaran"
+              ]}
+            />
+            <ExperienceCard
+              date="2019-2021"
+              title="Masters"
+              company="UCSB"
+              description={[
+                "Thesis: A study of generalization in deep neural networks",
+                "GPA: 4.0/4.0"
+              ]}
+            />
+            <ExperienceCard
+              date="2012-2016"
+              title="Bachelors in ECE"
+              company="IIT Roorkee"
+              description={[
+                "Thesis: Low-cost display devices using nanoparticles",
+                "Advisors: Prof. Brijesh Kumar and Prof. Sanjeev Manhas",
+                "GPA: 8.09/10.0"
+              ]}
+            />
+          </ol>
+        </section>
 
-    <Hr />
+        <hr class="border-gray-200 dark:border-gray-700" />
 
-    <section id="cv" class="pt-12 pb-6 prose dark:prose-invert max-w-none">
-      <h2 class="text-2xl font-semibold tracking-wide">CV</h2>
-      
-      <h3>Education</h3>
-      <ul>
-        <li><strong>PhD. in Electrical and Computer Engineering</strong>, University of California Santa Barbara, (Present)</li>
-        <li><strong>M.S. in Electrical and Computer Engineering</strong>, University of California Santa Barbara, 2021</li>
-        <li><strong>B.Tech. in Electronics and Communication Engineering</strong>, Indian Institute of Technology, Roorkee, 2016</li>
-      </ul>
+        <!-- Experience in Sidebar -->
+         <section id="experience">
+           <h2 class="text-lg font-bold tracking-wide mb-4 uppercase text-gray-800 dark:text-gray-200">Experience</h2>
+           <ol class="relative border-s border-gray-200 dark:border-gray-700 ms-3 space-y-8">
+            <ExperienceCard
+              date="Summer 2025"
+              title="Applied Scientist Intern"
+              company="Amazon AGI"
+              description={[
+                "Trained a novel Mixture of Experts (MoE) architecture to reduce inter-node communication costs."
+              ]}
+            />
+            <ExperienceCard
+              date="Jan 2024-Sep 2024"
+              title="ML Researcher"
+              company="Stealth startup"
+              description={[
+                "Part of the founding team, I led groundwork and architectural setup for ML based solutions, developing Vision, NLP, and speech-based models for tasks in the supply chain industry."
+              ]}
+            />
+            <ExperienceCard
+              date="Summer 2022"
+              title="Software Intern"
+              company="Apple"
+              description={[
+                "Developed physics based algorithms to improve the Fall Detection feature. Created data processing pipelines to efficiently handle hundreds of hours of time series data."
+              ]}
+            />
+             <ExperienceCard
+              date="2020 - 2021"
+              title="Grad Researcher"
+              company="UCSF"
+              description={[
+                "Developed Medviz - an AWS web portal and visualization tool for deploying machine learning models for processing of large PET/MRI datasets."
+              ]}
+            />
+            <ExperienceCard
+              date="Summer 2020"
+              title="ML Intern"
+              company="Briteseed"
+              description={[
+                "Using deep learning and computer vision on hyperspectral image data from surgical tools to detect tissues."
+              ]}
+            />
+            <ExperienceCard
+              date="2016 - 2019"
+              title="Engineer"
+              company="Samsung Research"
+              description={[
+                "Music Information Retrieval (MIR).",
+              ]}
+            />
+            <ExperienceCard
+              date="Summer 2015"
+              title="Embedded Intern"
+              company="VIOS Medical"
+              description={[
+                 "Characterized different wireless modules for energy consumption and connectivity.",
+                 "Developed software packaging and Linux distribution tools."
+              ]}
+            />
+           </ol>
+        </section>
 
-      <h3>Research Experience</h3>
-      <ul>
-        <li>
-          <strong>Graduate Student Researcher, UCSB</strong> (Oct'2021 - Present)
-          <ul>
-            <li>Developing tools and theoretical frameworks to lower the barriers in deploying deep learning models into real world.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Graduate Student Researcher, UCSF</strong> (Sep'2020 - Sep'2021)
-          <ul>
-            <li>Developed Medviz - an AWS web portal and visualization tool for deploying machine learning models for processing of large PET/MRI datasets.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Graduate Student Researcher, UCSB</strong> (Oct'2019 - Jun'2020)
-          <ul>
-            <li>Research on Generalization in Deep Neural Networks: <a href="https://vamshichowdary.github.io/publications/ms_thesis">(Thesis)</a>.</li>
-          </ul>
-        </li>
-      </ul>
+      </div>
 
-      <h3>Work Experience</h3>
-      <ul>
-        <li>
-          <strong>Software Engineering Intern, Apple, Cupertino, CA</strong> (Summer 2022)
-          <ul>
-            <li>Developed physics based algorithms to improve the Fall Detection feature. Created data processing pipelines to efficiently handle hundreds of hours of time series data.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Machine Learning Intern, Briteseed, Chicago, IL</strong> (Summer 2020)
-          <ul>
-            <li>Using deep learning and computer vision on hyperspectral image data from surgical tools to detect tissues.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Engineer, Samsung Research Institute, Delhi, India</strong> (Jul'2016 - Aug'2019)
-          <ul>
-            <li>Developing Audio/Music Applications for enhancing user experience in Samsung Smart TVs.</li>
-            <li>Developed ML based Music Classification Engine, a C++ based audio feature extraction framework with real time classification of audio using SVM and Statistical Analysis.</li>
-            <li>Developed bluetooth music player for visualizing and interacting with music on Samsung Smart TVs.</li>
-          </ul>
-        </li>
-        <li>
-          <strong>Embedded Systems Intern, VIOS Medical Pvt. Ltd., Bengaluru, India</strong> (Summer 2015)
-          <ul>
-            <li>Vios Medical was a U.S. based medical technology company focusing on utilizing medical-grade IoT sensors and Virtual Patient Care Services, acquired by Japan's Murata Manufacturing Co., Ltd.</li>
-            <li>Characterized different wireless modules used in Vios medical sensors based on energy consumption and connectivity.</li>
-            <li>Developed Vios Software packaging and distribution tool for Linux systems.</li>
-          </ul>
-        </li>
-      </ul>
+      <!-- Right Main Content (Intro + Publications) - Takes 8/12 columns -->
+      <div class="md:col-span-8 space-y-12">
+        
+        <!-- Intro Section -->
+        <section id="intro" class="prose dark:prose-invert max-w-none text-lg leading-relaxed">
+          <p>
+            I am a fifth year PhD student at University of California Santa Barbara (UCSB), advised by <a href="http://scg.ece.ucsb.edu/people.html">Shiv Chandrasekaran</a>.
+          </p>
+          <p>
+             My PhD thesis focusses on approximation theoretic approaches to design neural network architectures that are efficient and have robust generalization. My most recent work involves efficient neural network based solvers for PDEs.
+          </p>
+        </section>
 
-      <h3>Courses and Skills</h3>
-      <ul>
-        <li><strong>Courses:</strong> Computer Vision, Theoretical Machine Learning, Pattern Recognition, Digital Image Processing, Optimal Estimation and Filtering, Matrix Analysis and Computations.</li>
-        <li><strong>Programming Languages:</strong> C++, Python, C, Julia, Javascript, C#, Verilog, VHDL.</li>
-        <li><strong>Frameworks:</strong> PyTorch, Keras, Tensorflow, MATLAB, openCV, numpy, scikit, ffmpeg, CUDA, ARM Compute Library (ACL).</li>
-      </ul>
+        <hr class="border-gray-200 dark:border-gray-700" />
 
-      <h3>Scholarships and Awards</h3>
-      <ul>
-        <li>Outstanding Performance Award, Samsung Research Institute, 2018.</li>
-        <li>Project of the Year Award for "Music Genre Recognition", Samsung Research Institute, 2018.</li>
-        <li>Kishore Vaigyanik Protsahan Yojana Fellowship, Department of Science and Technology, Govt. of India, 2012.</li>
-        <li>Multiple IIT Roorkee Semester Merit Scholarships.</li>
-      </ul>
-    </section>
+        <!-- Publications -->
+        <section id="publications">
+          <h2 class="text-2xl font-bold tracking-wide mb-8 uppercase text-gray-900 dark:text-white border-b-2 border-accent inline-block pb-1">Publications</h2>
+          
+          <PublicationCard
+            title="MNO: A Multi-modal Neural Operator for Parametric Nonlinear BVPs"
+            authors="Vamshi C Madala, N Govindarajan, S Chandrasekaran"
+            venue="AAAI Workshop on AI to Accelerate Science and Engineering (AI2ASE), 2026"
+            paperUrl="https://arxiv.org/abs/2507.11870"
+            codeUrl="https://github.com/vamshichowdary/MultimodalNeuralOperator"
+          />
+          
+          <PublicationCard
+            title="CNNs Avoid the Curse of Dimensionality by Learning on Patches"
+            authors="Vamshi C Madala, S Chandrasekaran, J Bunk"
+            venue="IEEE Open Journal of Signal Processing, vol. 4, pp. 233-241, 2023"
+            paperUrl="https://ieeexplore.ieee.org/abstract/document/10107763"
+            codeUrl="https://github.com/vamshichowdary/cod-cnn"
+          />
+
+          <PublicationCard
+            title="Understanding and Visualizing Generalization in UNets"
+            authors="A Rajagopal, Vamshi C Madala, T.A Hope, P Larson"
+            venue="Proceedings of the Fourth Conference on Medical Imaging with Deep Learning, 2021"
+            paperUrl="https://proceedings.mlr.press/v143/rajagopal21a.html"
+            codeUrl="https://gitlab.com/abhe/UNet-Generalization_MIDL2021"
+          />
+          
+          <PublicationCard
+            title="Predicting Generalization in Deep Learning via Local Measures of Distortion"
+            authors="A Rajagopal, Vamshi C Madala, S Chandrasekaran, P Larson"
+            venue="arXiv preprint arXiv:2012.06969, 2020"
+            paperUrl="https://arxiv.org/abs/2012.06969"
+          />
+
+          <PublicationCard
+            title="A Study of Generalization in Deep Neural Networks"
+            authors="Vamshi C Madala"
+            venue="Master's Thesis, University of California, Santa Barbara, 2021"
+            paperUrl="https://www.proquest.com/dissertations-theses/study-generalization-deep-neural-networks/docview/2604320736/se-2?accountid=14522"
+          />
+        </section>
+      </div>
+    </div>
   </main>
   <Footer />
 </Layout>
