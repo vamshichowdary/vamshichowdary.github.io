@@ -456,10 +456,14 @@
 }
 
 .distill-content .footnotes li:target {
-    background: rgba(139, 92, 246, 0.1);
+    background: rgba(0, 108, 172, 0.1);
     border-radius: 4px;
     padding: 0.5rem;
     margin-left: -0.5rem;
+}
+
+:where([data-theme="dark"]) .distill-content .footnotes li:target {
+    background: rgba(255, 107, 1, 0.1);
 }
 
 /* Back reference link in footnotes */
@@ -467,115 +471,6 @@
     font-size: 0.875rem;
     margin-left: 0.25rem;
     text-decoration: none;
-}
-
-/* ===== Citation/Reference Hover Cards ===== */
-
-/* Reference markers like [1] */
-.distill-content .citation-ref {
-    color: var(--distill-link-color);
-    cursor: pointer;
-    font-weight: 500;
-    position: relative;
-}
-
-/* Citation hover card */
-.citation-tooltip {
-    position: fixed;
-    max-width: 450px;
-    padding: 1.25rem 1.5rem;
-    background: var(--distill-bg);
-    border: 1px solid var(--distill-border-color);
-    border-radius: 10px;
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.2), 0 5px 15px rgba(0, 0, 0, 0.1);
-    font-size: 0.9rem;
-    line-height: 1.6;
-    z-index: 10000;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(10px);
-    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
-    pointer-events: none;
-}
-
-.citation-tooltip.visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-}
-
-.citation-tooltip .citation-title {
-    font-weight: 600;
-    color: var(--distill-heading-color);
-    margin-bottom: 0.5rem;
-    line-height: 1.4;
-}
-
-.citation-tooltip .citation-authors {
-    font-size: 0.85rem;
-    color: var(--distill-muted);
-    margin-bottom: 0.25rem;
-}
-
-.citation-tooltip .citation-venue {
-    font-size: 0.85rem;
-    color: var(--distill-muted);
-    font-style: italic;
-}
-
-.citation-tooltip .citation-link {
-    display: inline-block;
-    margin-top: 0.75rem;
-    font-size: 0.8rem;
-    color: var(--distill-link-color);
-}
-
-/* ===== References Section ===== */
-.distill-content .references {
-    margin-top: 4rem;
-    padding-top: 2rem;
-    border-top: 1px solid var(--distill-border-color);
-}
-
-.distill-content .references-title {
-    font-size: 1.5rem;
-    font-weight: 600;
-    margin-bottom: 1.5rem;
-    color: var(--distill-heading-color);
-}
-
-.distill-content .reference-item {
-    margin-bottom: 1.25rem;
-    padding-left: 2.5rem;
-    position: relative;
-    font-size: 0.95rem;
-}
-
-.distill-content .reference-item::before {
-    content: attr(data-ref-number);
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: 600;
-    color: var(--distill-link-color);
-    width: 2rem;
-}
-
-.distill-content .reference-title {
-    font-weight: 600;
-    color: var(--distill-heading-color);
-}
-
-.distill-content .reference-authors {
-    color: var(--distill-muted);
-    font-size: 0.9rem;
-}
-
-.distill-content .reference-venue {
-    color: var(--distill-muted);
-    font-size: 0.9rem;
-    font-style: italic;
 }
 
 /* ===== Mobile TOC ===== */

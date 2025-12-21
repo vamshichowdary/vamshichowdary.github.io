@@ -30,8 +30,6 @@ const formattedDate = pubDatetime.toLocaleDateString('en-US', {
   day: 'numeric'
 });
 
-// Calculate reading time (rough estimate: 200 words per minute)
-const wordCount = post.body?.split(/\s+/).length || 0;
 ---
 
 <Layout title={title} description={description}>
@@ -203,11 +201,6 @@ const wordCount = post.body?.split(/\s+/).length || 0;
       // Mouse leave - hide tooltip
       ref.addEventListener('mouseleave', () => {
         tooltip.classList.remove('visible');
-      });
-      
-      // Prevent default click behavior (optional: still allow clicking to jump)
-      ref.addEventListener('click', (e) => {
-        // Keep default behavior to jump to footnote
       });
     });
   }
