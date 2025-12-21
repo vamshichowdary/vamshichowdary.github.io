@@ -3,6 +3,7 @@ import { getCollection, render } from "astro:content";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import "@/styles/distill.css";
 
 export async function getStaticPaths() {
   const posts = await getCollection("blog");
@@ -14,15 +15,219 @@ export async function getStaticPaths() {
 
 const { post } = Astro.props;
 const { title, description, pubDatetime } = post.data;
-const { Content } = await render(post);
+const { Content, headings } = await render(post);
+
+// Filter headings for TOC (h2 and h3 only, exclude auto-generated Footnotes section)
+const tocHeadings = headings.filter(h => 
+  (h.depth === 2 || h.depth === 3) && 
+  h.text.toLowerCase() !== 'footnotes'
+);
+
+// Format date nicely
+const formattedDate = pubDatetime.toLocaleDateString('en-US', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric'
+});
+
+// Calculate reading time (rough estimate: 200 words per minute)
+const wordCount = post.body?.split(/\s+/).length || 0;
 ---
 
 <Layout title={title} description={description}>
-  <Header />
-  <main id="main-content" class="max-w-4xl mx-auto px-6 py-8 prose dark:prose-invert">
-    <h1 class="mb-2">{title}</h1>
-    <div class="text-sm text-gray-500 mb-8">{pubDatetime.toLocaleDateString()}</div>
-    <Content />
-  </main>
-  <Footer />
+  <div class="distill-article">
+    <Header />
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress" id="reading-progress"></div>
+    
+    <!-- Article Header -->
+    <header class="distill-header">
+      <h1 class="distill-title">{title}</h1>
+      {description && <p class="distill-description">{description}</p>}
+      <div class="distill-meta">
+        <div class="distill-meta-item">
+          <span class="distill-meta-label">Published</span>
+          <time datetime={pubDatetime.toISOString()}>{formattedDate}</time>
+        </div>
+      </div>
+    </header>
+    
+    <!-- Main Content with TOC -->
+    <div class="distill-wrapper">
+      <!-- Desktop Table of Contents -->
+      {tocHeadings.length > 0 && (
+        <aside class="distill-toc">
+          <div class="distill-toc-title">Contents</div>
+          <ul class="distill-toc-list">
+            {tocHeadings.map((heading) => (
+              <li>
+                <a 
+                  href={`#${heading.slug}`}
+                  class={heading.depth === 3 ? 'toc-level-3' : ''}
+                >
+                  {heading.text}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </aside>
+      )}
+      
+      <!-- Article Content -->
+      <main id="main-content" class="distill-content">
+        <!-- Mobile Table of Contents -->
+        {tocHeadings.length > 0 && (
+          <details class="distill-mobile-toc">
+            <summary>Table of Contents</summary>
+            <ul class="distill-toc-list">
+              {tocHeadings.map((heading) => (
+                <li>
+                  <a 
+                    href={`#${heading.slug}`}
+                    class={heading.depth === 3 ? 'toc-level-3' : ''}
+                  >
+                    {heading.text}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </details>
+        )}
+        
+        <Content />
+      </main>
+    </div>
+    
+    <Footer />
+  </div>
 </Layout>
+
+<script>
+  // Reading progress bar
+  function updateProgress() {
+    const progressBar = document.getElementById('reading-progress');
+    if (!progressBar) return;
+    
+    const scrollTop = window.scrollY;
+    const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+    progressBar.style.width = `${progress}%`;
+  }
+  
+  // Active TOC highlighting
+  function updateActiveTOC() {
+    const headings = document.querySelectorAll('.distill-content h2, .distill-content h3');
+    const tocLinks = document.querySelectorAll('.distill-toc-list a');
+    
+    let currentActive = '';
+    
+    headings.forEach((heading) => {
+      const rect = heading.getBoundingClientRect();
+      if (rect.top <= 100) {
+        currentActive = heading.id;
+      }
+    });
+    
+    tocLinks.forEach((link) => {
+      const href = link.getAttribute('href');
+      if (href === `#${currentActive}`) {
+        link.classList.add('active');
+      } else {
+        link.classList.remove('active');
+      }
+    });
+  }
+  
+  // ===== Footnote Hover Tooltips =====
+  function initFootnoteTooltips() {
+    // Create tooltip element if it doesn't exist
+    let tooltip = document.getElementById('footnote-tooltip');
+    if (!tooltip) {
+      tooltip = document.createElement('div');
+      tooltip.id = 'footnote-tooltip';
+      tooltip.className = 'footnote-tooltip';
+      document.body.appendChild(tooltip);
+    }
+    
+    // Find all footnote references
+    const footnoteRefs = document.querySelectorAll('a[data-footnote-ref]');
+    
+    footnoteRefs.forEach((ref) => {
+      const href = ref.getAttribute('href');
+      if (!href) return;
+      
+      // Find the corresponding footnote content
+      const footnoteId = href.replace('#', '');
+      const footnote = document.getElementById(footnoteId);
+      
+      if (!footnote) return;
+      
+      // Get footnote content (clone and clean it)
+      const footnoteContent = footnote.cloneNode(true);
+      // Remove the back-reference link
+      const backRef = footnoteContent.querySelector('a[data-footnote-backref]');
+      if (backRef) backRef.remove();
+      
+      // Mouse enter - show tooltip
+      ref.addEventListener('mouseenter', (e) => {
+        tooltip.innerHTML = footnoteContent.innerHTML;
+        tooltip.classList.add('visible');
+        
+        // Position the tooltip
+        const rect = ref.getBoundingClientRect();
+        const tooltipRect = tooltip.getBoundingClientRect();
+        
+        let left = rect.left;
+        let top = rect.bottom + 10;
+        
+        // Ensure tooltip doesn't go off-screen to the right
+        if (left + tooltipRect.width > window.innerWidth - 20) {
+          left = window.innerWidth - tooltipRect.width - 20;
+        }
+        
+        // Ensure tooltip doesn't go off-screen to the left
+        if (left < 20) {
+          left = 20;
+        }
+        
+        // If tooltip would go below viewport, show above instead
+        if (top + tooltipRect.height > window.innerHeight - 20) {
+          top = rect.top - tooltipRect.height - 10;
+        }
+        
+        tooltip.style.left = `${left}px`;
+        tooltip.style.top = `${top}px`;
+      });
+      
+      // Mouse leave - hide tooltip
+      ref.addEventListener('mouseleave', () => {
+        tooltip.classList.remove('visible');
+      });
+      
+      // Prevent default click behavior (optional: still allow clicking to jump)
+      ref.addEventListener('click', (e) => {
+        // Keep default behavior to jump to footnote
+      });
+    });
+  }
+  
+  // Initialize
+  window.addEventListener('scroll', () => {
+    updateProgress();
+    updateActiveTOC();
+  }, { passive: true });
+  
+  // Initial calls
+  updateProgress();
+  updateActiveTOC();
+  initFootnoteTooltips();
+  
+  // Re-run on view transitions
+  document.addEventListener('astro:after-swap', () => {
+    updateProgress();
+    updateActiveTOC();
+    initFootnoteTooltips();
+  });
+</script>
+

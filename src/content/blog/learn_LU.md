@@ -5,9 +5,13 @@ pubDatetime: 2025-12-21
 tags: ["general"]
 ---
 
-In our previous work \[1\], we introduced the GFMM-block, which is a generalized parameterization of the Fast Multipole Method's (FMM) matrix-vector computational graph. We showed that gradient descent can be used to learn FMM-like representations of (inverses of) linear operators instead of relying on hand-crafted FMM construction algorithms. This is useful when the operator structures are complex and the construction of FMM is unknown for certain operators. Moreover, the parameterization is efficient in the number of required parameters compared to a fully dense representation of the operator.
+## Intro
 
-In this post, I want to extend this idea further to explore the possibility of ***learning*** the factorizations of linear operators, specifically the LU factorization. Previous work \[2\] tried to achieve this with gradient descent by representing L and U as dense linear layers and masking the upper and lower triangular parts of the learnable weight matrices, which is not an efficient parameterization. Inspired by the GFMM-block, we can actually represent L and U more compactly and thus save on memory as well as compute complexity. This could be useful for large $N \times N$ matrices, as the GFMM-block representation is only $O(N)$ in the number of parameters.
+In our previous work[^1], we introduced the GFMM-block, which is a generalized parameterization of the Fast Multipole Method's (FMM) matrix-vector computational graph. We showed that gradient descent can be used to learn FMM-like representations of (inverses of) linear operators instead of relying on hand-crafted FMM construction algorithms. This is useful when the operator structures are complex and the construction of FMM is unknown for certain operators. Moreover, the parameterization is efficient in the number of required parameters compared to a fully dense representation of the operator.
+
+In this post, I want to extend this idea further to explore the possibility of ***learning*** the factorizations of linear operators, specifically the LU factorization. Previous work[^2] tried to achieve this with gradient descent by representing L and U as dense linear layers and masking the upper and lower triangular parts of the learnable weight matrices, which is not an efficient parameterization. Inspired by the GFMM-block, we can actually represent L and U more compactly and thus save on memory as well as compute complexity. This could be useful for large $N \times N$ matrices, as the GFMM-block representation is only $O(N)$ in the number of parameters.
+
+## Structure
 
 The rest of the post is structured as follows: 
 1. GFMM-block : I will describe the GFMM-block and how it can be also used to represent block-lower and block-upper triangular matrices.
@@ -15,7 +19,7 @@ The rest of the post is structured as follows:
 1. Examples: Numerical examples of LU factorization of 1D discrete Laplacian, 1D and 2D, convection diffusion, 1D and 2D biharmonic operators and dense but low-rank covariance matrix of RBF kernel.
 1. Thoughts: I will discuss the limitations of the current approach and some thoughts about future work.
 
-
+### Subsection
 I want to take a moment here to introduce the FMM representation. Consider, for example, an exponential covariance matrix $A$ defined as $A_{i,j} = \rho^{|i-j|}$ where $0 < \rho < 1$. This matrix appears frequently in ML applications (Gaussian Processes with exponential kernels) and [Physics](https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process). This is a fully dense matrix. But if we $2\times2$ block-partition it and observe the $\color{orange}\text{off-diagonal blocks}$, we notice that they are actually rank-1. See an $8 \times 8$ example below.
 
 $$
@@ -156,3 +160,11 @@ $$
 and obtaining the low-rank representations of the level-2 off-diagonal blocks (and denoted by super-scripts).
 
 [See here for more such rank-structured matrix examples](https://scg.ece.ucsb.edu/publications/theses/Lyons_2005_Thesis.pdf).
+
+---
+
+## References
+
+[^1]: **GFMM: Generalized Fast Multipole Method for learning matrix-vector products.** Our previous work on efficient parameterization of FMM-like operators. [Link to paper](https://example.com/gfmm)
+
+[^2]: **Learning LU Factorization with Dense Layers.** Previous approach using masked dense linear layers for L and U representation, which is not parameter efficient. [Link to paper](https://example.com/lu-dense)

@@ -40,7 +40,8 @@ html[data-theme="dark"] {
     }
 
     body {
-        @apply flex min-h-svh flex-col bg-background font-mono text-foreground selection:bg-accent/75 selection:text-background;
+        @apply flex min-h-svh flex-col bg-background text-foreground selection:bg-accent/75 selection:text-background;
+        font-family: 'Roboto', -apple-system, BlinkMacSystemFont, sans-serif;
     }
 
     a,
