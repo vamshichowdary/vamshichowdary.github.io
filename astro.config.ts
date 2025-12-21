@@ -8,6 +8,8 @@ import {
     transformerNotationHighlight,
     transformerNotationWordHighlight,
 } from "@shikijs/transformers";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import { SITE } from "./src/config";
 
 // https://astro.build/config
@@ -19,7 +21,12 @@ export default defineConfig({
         }),
     ],
     markdown: {
-        remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+        remarkPlugins: [
+            remarkMath,
+            remarkToc,
+            [remarkCollapse, { test: "Table of contents" }],
+        ],
+        rehypePlugins: [rehypeKatex],
         shikiConfig: {
             // For more themes, visit https://shiki.style/themes
             themes: { light: "min-light", dark: "night-owl" },
