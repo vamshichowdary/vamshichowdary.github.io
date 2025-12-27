@@ -8,7 +8,7 @@ export interface Props {
 }
 
 const { href, frontmatter } = Astro.props;
-const { title, pubDatetime, description, ogImage } = frontmatter;
+const { title, pubDatetime, description, ogImage, codeUrl } = frontmatter;
 
 const date = pubDatetime.toLocaleDateString("en-US", {
   year: "numeric",
@@ -41,5 +41,12 @@ const date = pubDatetime.toLocaleDateString("en-US", {
     </h3>
     <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">{date}</p>
     <p class="text-sm italic text-gray-500 dark:text-gray-400 mb-2">{description}</p>
+    {codeUrl && (
+      <div class="flex gap-3 text-sm">
+        <a href={codeUrl} target="_blank" rel="noopener noreferrer" class="text-accent hover:underline">
+          [Code]
+        </a>
+      </div>
+    )}
   </div>
 </div>
