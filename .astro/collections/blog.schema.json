@@ -45,6 +45,9 @@
             "others"
           ]
         },
+        "ogImage": {
+          "type": "string"
+        },
         "$schema": {
           "type": "string"
         }

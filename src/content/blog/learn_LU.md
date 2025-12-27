@@ -2,6 +2,7 @@
 title: Learning LU Factorization using gradient descent
 description: Formulating LU factorization of linear operators as a neural network training problem by representing L and U as structured weight matrices.
 pubDatetime: 2025-12-27
+ogImage: ./assets/LU-approx.jpg
 tags:
   - FMM
   - LU-Factorization
