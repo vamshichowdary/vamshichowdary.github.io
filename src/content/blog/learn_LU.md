@@ -525,7 +525,7 @@ Condition no. of $A$: 1201921.
 Condition no. of $\hat{A}$: 5652878336.
 
 
-![](assets/lu-approx.jpg)
+![](assets/LU-approx.jpg)
 
 
 We see that the network is able to produce decent approximations of even the complex operators, as shown by the absolute approximation error and backward errors. But if the underlying matrix is ill-conditioned, then the approximated LU is not good for solving $Ax = b$ like we initially anticipated given the absence of pivoting.
