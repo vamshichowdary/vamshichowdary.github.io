@@ -537,3 +537,28 @@ html {
 :where([data-theme="dark"]) .reading-progress {
     background: linear-gradient(90deg, #ff6b01, #ff9a44);
 }
+
+/* ===== Giscus Comments ===== */
+.giscus-container {
+    margin-top: 4rem;
+    padding-top: 2rem;
+    border-top: 1px solid var(--distill-border-color);
+}
+
+.comments-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: var(--distill-heading-color);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.giscus {
+    margin-top: 1rem;
+}
+
+/* Ensure giscus iframe is responsive */
+.giscus-frame {
+    width: 100% !important;
+}
