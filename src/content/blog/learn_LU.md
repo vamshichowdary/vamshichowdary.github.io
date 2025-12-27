@@ -3,6 +3,7 @@ title: Learning LU Factorization using gradient descent
 description: Formulating LU factorization of linear operators as a neural network training problem by representing L and U as structured weight matrices.
 pubDatetime: 2025-12-27
 ogImage: ./assets/LU-approx.jpg
+codeUrl: https://github.com/vamshichowdary/learn_LU
 tags:
   - FMM
   - LU-Factorization
@@ -10,20 +11,19 @@ tags:
 
 ## Introduction
 
-In our previous work[^1], we introduced the GFMM-block, which is a generalized parameterization of the Fast Multipole Method's (FMM) matrix-vector computational graph. We showed that gradient descent can be used to learn FMM-like representations of (inverses of) linear operators instead of relying on hand-crafted FMM construction algorithms. This is useful when the operator structures are complex and the construction of FMM is unknown for certain operators. Moreover, the parameterization is efficient in the number of required parameters compared to a fully dense representation of the operator.
+In our previous work[^1], we introduced the GFMM-block, which is a generalized parameterization of the [Fast Multipole Method's (FMM)](https://en.wikipedia.org/wiki/Fast_multipole_method) matrix-vector computational graph. We showed that gradient descent can be used to learn FMM-like representations of (inverses of) linear operators instead of relying on hand-crafted FMM construction algorithms. This is useful when the operator structures are complex and the construction of FMM is unknown for certain operators. Moreover, the parameterization is efficient in the number of required parameters compared to a fully dense representation of the operator.
 
-In this post, I want to extend this idea further to explore the possibility of ***learning*** the factorizations of linear operators, specifically the LU factorization. Previous work[^2] tried to achieve this with gradient descent by representing L and U as dense linear layers and masking the upper and lower triangular parts of the learnable weight matrices, which is not an efficient parameterization. Inspired by the GFMM-block, we can actually represent L and U more compactly and thus save on memory as well as compute complexity. This could be useful for large $N \times N$ matrices, as the GFMM-block representation is only $O(N)$ in the number of parameters.
+In this post, I want to extend this idea further to explore the possibility of ***learning*** the factorizations of linear operators, specifically the LU factorization. Previous work[^2] tried to achieve this with gradient descent by representing L and U as dense linear layers and masking the upper and lower triangular parts of the learnable weight matrices, which is not an efficient parameterization. Inspired by the GFMM-block, we can actually represent L and U more compactly and thus save on memory as well as compute complexity. This could be useful for large $N \times N$ matrices, as the GFMM-block representation grows only as $O(N)$ in the number of parameters.
+
+This post is structured as follows: 
+1. **GFMM-block** : I will describe the GFMM-block and how it can be also used to represent block-lower and block-upper triangular matrices.
+2. **Training to factorize**: I describe the training process and some tricks that we used to improve the training like transpose loss, block-wise training.
+3. **Examples**: Numerical examples of LU factorization of 1D discrete Laplacian, 1D and 2D, convection diffusion, 1D and 2D biharmonic operators and dense but low-rank covariance matrix of RBF kernel.
+4. **Thoughts**: I will discuss the limitations of the current approach and some thoughts about future work.
 
 ## FMM and the structured representation of matrices
-
-The rest of the post is structured as follows: 
-1. GFMM-block : I will describe the GFMM-block and how it can be also used to represent block-lower and block-upper triangular matrices.
-1. Training to factorize: There are some tricks that I used to improve the training - transpose loss, block-wise training.
-1. Examples: Numerical examples of LU factorization of 1D discrete Laplacian, 1D and 2D, convection diffusion, 1D and 2D biharmonic operators and dense but low-rank covariance matrix of RBF kernel.
-1. Thoughts: I will discuss the limitations of the current approach and some thoughts about future work.
-
 ### FMM level-1
-I want to take a moment here to introduce the FMM representation. Consider, for example, an exponential covariance matrix $A$ defined as $A_{i,j} = \rho^{|i-j|}$ where $0 < \rho < 1$. This matrix appears frequently in ML applications (Gaussian Processes with exponential kernels) and [Physics](https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process) (William Lyons' PhD thesis[^3] contains more such rank-structured matrix examples). This is a fully dense matrix. But if we $2\times2$ block-partition it and observe the $\color{orange}\text{off-diagonal blocks}$, we notice that they are actually rank-1. See an $8 \times 8$ numerical example below.
+Before I describe the GFMM-block, I want to take a moment here to introduce the FMM representation. Consider, for example, an exponential covariance matrix $A$ defined as $A_{i,j} = \rho^{|i-j|}$ where $0 < \rho < 1$. This matrix appears frequently in ML applications (Gaussian Processes with exponential kernels) and [Physics](https://en.wikipedia.org/wiki/Ornstein%E2%80%93Uhlenbeck_process) (William Lyons' PhD thesis[^3] contains more such rank-structured matrix examples). This is a fully dense matrix. But if we $2\times2$ block-partition it and observe the $\color{orange}\text{off-diagonal blocks}$, we notice that they are actually rank-1 (see an $8 \times 8$ numerical example below).
 
 $$
 \left[
@@ -357,7 +357,7 @@ Similarly, our goal in learning the LU factorization of a matrix $A$ is so that 
 Once the network is trained, if needed, L and U can be computed separately by generating columns $[L(e_{i})], [U(e_{i})] \quad \forall i$. But of course, the network representations are compact.
 
 ### Limitations
-1. The main limitation of this proposed approach is the lack of pivoting, because the networks are static in their representations. This might constrain the domain of learnable matrices to only positive definite matrices. In which case, the advantage of this learnable method over classical gaussian elimination would only be that of memory efficiency.
+1. The main limitation of this proposed approach is the lack of pivoting because the networks are static in their representations. This might constrain the domain of learnable matrices to only positive definite matrices. In which case, the advantage of this learnable method over classical gaussian elimination would only be that of memory efficiency.
 2. Another major limitation is numerical accuracy. Because the networks are composed as sequence of matrix-matrix multiplications, the floating point errors accumulate rapidly.
 
 Because of these limitations, this method might be more suitable for computing approximate LU and to be used as [preconditioners](https://en.wikipedia.org/wiki/Preconditioner) for iterative solvers.
@@ -415,7 +415,7 @@ LU =
 \end{bmatrix}
 $$
 
-We can see that the lower (and rightside) blocks have more number of parameters contributing to the values at those positions. So, the network has more freedom to optimize and reduce the error for those blocks, whereas top-left blocks are more constrained by fewer parameters. Is there a way to fix this without trading-off the smaller errors in bottom right blocks? We found that there is actually a way. To see how, first observe that the parameters have a dependency pattern from top left to bottom right. That is, NO parameter at the $(i,j)$ location of the combined $LU$ matrix depends on the parameters at $(<i, <j)$ locations. 
+We can see that the lower blocks have more number of parameters contributing to the values at those positions. So, the network has more freedom to optimize and reduce the error for those blocks, whereas top-left blocks are more constrained by fewer parameters. Is there a way to fix this without trading-off the smaller errors in bottom right blocks? We found that there is actually a way. To see how, first observe that the parameters have a dependency pattern from top left to bottom right. That is, NO parameter at the $(i,j)$ location of the combined $LU$ matrix depends on the parameters at $(<i, <j)$ locations. 
 
 So, we can do sequential optimization, starting by only updating the parameters appearing in the first row by only computing MSE loss of $\hat{A_{i}}[0:P]$ i.e. first block row of $A$. Once the error of this first block row converges to a sufficiently smaller value, we can freeze these parameters and only backpropagate using the MSE loss of $\hat{A_{i}}[P:2P]$ (i.e. second block row of $A$) and continue until the last block row. We observed that this resolved the issue of larger errors at the top-left locations without compromising on the smaller errors at bottom-right locations.
 

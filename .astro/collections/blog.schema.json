@@ -48,6 +48,10 @@
         "ogImage": {
           "type": "string"
         },
+        "codeUrl": {
+          "type": "string",
+          "format": "uri"
+        },
         "$schema": {
           "type": "string"
         }

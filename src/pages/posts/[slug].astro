@@ -14,7 +14,7 @@ export async function getStaticPaths() {
 }
 
 const { post } = Astro.props;
-const { title, description, pubDatetime } = post.data;
+const { title, description, pubDatetime, codeUrl } = post.data;
 const { Content, headings } = await render(post);
 
 // Filter headings for TOC (h2 and h3 only, exclude auto-generated Footnotes section)
@@ -48,6 +48,14 @@ const formattedDate = pubDatetime.toLocaleDateString('en-US', {
           <span class="distill-meta-label">Published</span>
           <time datetime={pubDatetime.toISOString()}>{formattedDate}</time>
         </div>
+        {codeUrl && (
+          <div class="distill-meta-item">
+            <span class="distill-meta-label">Code</span>
+            <a href={codeUrl} target="_blank" rel="noopener noreferrer" class="code-link" style="color: var(--accent);">
+              {codeUrl}
+            </a>
+          </div>
+        )}
       </div>
     </header>
     
