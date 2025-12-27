@@ -170,13 +170,13 @@ const formattedDate = pubDatetime.toLocaleDateString('en-US', {
       if (!footnote) return;
       
       // Get footnote content (clone and clean it)
-      const footnoteContent = footnote.cloneNode(true);
+      const footnoteContent = footnote.cloneNode(true) as HTMLElement;
       // Remove the back-reference link
       const backRef = footnoteContent.querySelector('a[data-footnote-backref]');
       if (backRef) backRef.remove();
       
       // Mouse enter - show tooltip
-      ref.addEventListener('mouseenter', (e) => {
+      ref.addEventListener('mouseenter', () => {
         tooltip.innerHTML = footnoteContent.innerHTML;
         tooltip.classList.add('visible');
         
